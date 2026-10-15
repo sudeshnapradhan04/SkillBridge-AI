@@ -1,3 +1,4 @@
+
 import streamlit as st
 
 st.set_page_config(
@@ -19,7 +20,6 @@ st.divider()
 st.header("📌 Choose Your Target Role")
 
 role = st.selectbox(
-    
     "Select your placement role",
     [
         "Software Developer",
@@ -37,8 +37,6 @@ role_skills = {
 required_skills = role_skills[role]
 
 st.info(f"Recommended skills for {role}: {', '.join(required_skills)}")
-
-
 
 st.header("📊 Self-Assess Your Skills")
 
@@ -59,6 +57,15 @@ if st.button("Analyze My Preparation"):
 
     st.subheader(f"Preparation Analysis: {role}")
     st.metric("Average Self-Assessment", f"{average:.1f}/100")
+
+    if average < 40:
+        st.info("Start with fundamentals and practice basic questions daily.")
+    elif average < 60:
+        st.info("Focus on core concepts and solve beginner-level problems.")
+    elif average < 80:
+        st.info("Practice interview questions and timed coding problems.")
+    else:
+        st.success("Great progress! Focus on mock interviews and revision.")
 
     weak_skills = {
         skill: score
