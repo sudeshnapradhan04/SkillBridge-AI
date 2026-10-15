@@ -97,4 +97,60 @@ if st.button("Analyze My Preparation"):
             st.write(f"🟡 Medium priority: {skill} — {score}/100")
         else:
             st.write(f"🟢 Maintain: {skill} — {score}/100")
+            
+    st.divider()
+    st.subheader("📚 Your Personalized Study Roadmap")
+
+    study_tasks = {
+        "Java": [
+            "Revise variables, loops, arrays, and OOP.",
+            "Solve 3 beginner Java coding problems."
+        ],
+        "DSA": [
+            "Study arrays, strings, and searching.",
+            "Practice 3 easy DSA problems."
+        ],
+        "Data Structures": [
+            "Learn arrays, linked lists, stacks, and queues.",
+            "Solve 3 beginner problems."
+        ],
+        "DBMS": [
+            "Revise keys, normalization, and joins.",
+            "Practice SQL queries and DBMS interview questions."
+        ],
+        "Operating Systems": [
+            "Study processes, threads, and CPU scheduling.",
+            "Revise deadlocks and memory management."
+        ],
+        "SQL": [
+            "Practice SELECT, JOIN, GROUP BY, and subqueries.",
+            "Solve 5 beginner SQL questions."
+        ],
+        "Python": [
+            "Revise functions, lists, dictionaries, and loops.",
+            "Solve 3 Python coding problems."
+        ],
+        "Statistics": [
+            "Study mean, median, standard deviation, and probability.",
+            "Practice basic statistics questions."
+        ],
+        "Data Visualization": [
+            "Learn charts using Matplotlib and Plotly.",
+            "Create charts from a small dataset."
+        ],
+        "Machine Learning": [
+            "Revise regression, classification, and model evaluation.",
+            "Build a small model using scikit-learn."
+        ]
+    }
+
+    for skill, score in priority_skills:
+        if score < 60:
+            st.markdown(f"**🎯 {skill} — Start here ({score}/100)**")
+            for task in study_tasks.get(
+                skill,
+                ["Revise the fundamentals.", "Practice beginner-level questions."]
+            ):
+                st.write(f"- {task}")
+
 
