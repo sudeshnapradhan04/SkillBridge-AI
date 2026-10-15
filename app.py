@@ -152,5 +152,22 @@ if st.button("Analyze My Preparation"):
                 ["Revise the fundamentals.", "Practice beginner-level questions."]
             ):
                 st.write(f"- {task}")
+                
+    st.divider()
+    st.subheader("📅 Your 7-Day Placement Study Plan")
+
+    study_plan = {
+        1: "Revise the fundamentals of your weakest skill.",
+        2: "Learn important concepts and take notes.",
+        3: "Solve 5 beginner-level practice questions.",
+        4: "Practice interview questions for your weakest skill.",
+        5: "Work on your second-weakest skill.",
+        6: "Solve a timed coding or technical quiz.",
+        7: "Revise everything and take a mock interview."
+    }
+
+    for day, task in study_plan.items():
+        st.markdown(f"**Day {day}:** {task}")
+
 
 
