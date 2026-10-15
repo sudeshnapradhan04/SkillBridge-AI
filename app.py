@@ -153,10 +153,10 @@ if st.button("Analyze My Preparation"):
             ):
                 st.write(f"- {task}")
                 
-    st.divider()
-    st.subheader("📅 Your 7-Day Placement Study Plan")
+        st.divider()
+        st.subheader("📅 Your 7-Day Placement Study Plan")
 
-    study_plan = {
+        study_plan = {
         1: "Revise the fundamentals of your weakest skill.",
         2: "Learn important concepts and take notes.",
         3: "Solve 5 beginner-level practice questions.",
@@ -166,8 +166,8 @@ if st.button("Analyze My Preparation"):
         7: "Revise everything and take a mock interview."
     }
 
-    for day, task in study_plan.items():
-        st.markdown(f"**Day {day}:** {task}")
+        for day, task in study_plan.items():
+            st.markdown(f"**Day {day}:** {task}")
 
 
 
