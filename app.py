@@ -153,21 +153,25 @@ if st.button("Analyze My Preparation"):
             ):
                 st.write(f"- {task}")
                 
-        st.divider()
-        st.subheader("📅 Your 7-Day Placement Study Plan")
+        
+st.divider()
+st.header("✅ Track Your Study Progress")
 
-        study_plan = {
-        1: "Revise the fundamentals of your weakest skill.",
-        2: "Learn important concepts and take notes.",
-        3: "Solve 5 beginner-level practice questions.",
-        4: "Practice interview questions for your weakest skill.",
-        5: "Work on your second-weakest skill.",
-        6: "Solve a timed coding or technical quiz.",
-        7: "Revise everything and take a mock interview."
-    }
+daily_tasks = [
+    "Day 1: Revise fundamentals",
+    "Day 2: Learn important concepts",
+    "Day 3: Solve 5 practice questions",
+    "Day 4: Practice interview questions",
+    "Day 5: Study your second-weakest skill",
+    "Day 6: Take a timed technical quiz",
+    "Day 7: Complete a mock interview"
+]
 
-        for day, task in study_plan.items():
-            st.markdown(f"**Day {day}:** {task}")
+completed = 0
 
+for i, task in enumerate(daily_tasks):
+    if st.checkbox(task, key=f"progress_day_{i+1}"):
+        completed += 1
 
-
+st.progress(completed / len(daily_tasks))
+st.write(f"**Progress: {completed}/7 days completed**")
