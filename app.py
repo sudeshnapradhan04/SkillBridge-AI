@@ -82,3 +82,19 @@ if st.button("Analyze My Preparation"):
 
     st.subheader("Your Skill Scores")
     st.bar_chart(skill_scores)
+    
+    st.subheader("🎯 Skill Improvement Priorities")
+
+    priority_skills = sorted(
+        skill_scores.items(),
+        key=lambda item: item[1]
+    )
+
+    for skill, score in priority_skills:
+        if score < 60:
+            st.write(f"🔴 High priority: {skill} — {score}/100")
+        elif score < 80:
+            st.write(f"🟡 Medium priority: {skill} — {score}/100")
+        else:
+            st.write(f"🟢 Maintain: {skill} — {score}/100")
+
