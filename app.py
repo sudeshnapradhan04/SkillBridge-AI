@@ -1,5 +1,8 @@
 
 import streamlit as st
+from pypdf import PdfReader
+import re
+
 
 st.set_page_config(
     page_title="SkillBridge AI",
@@ -175,3 +178,87 @@ for i, task in enumerate(daily_tasks):
 
 st.progress(completed / len(daily_tasks))
 st.write(f"**Progress: {completed}/7 days completed**")
+st.divider()
+
+st.header("📄 Resume Analysis & Job Matching")
+
+uploaded_resume = st.file_uploader(
+    "Upload your Resume (PDF)",
+    type=["pdf"]
+)
+
+job_description = st.text_area(
+    "Paste the Job Description here",
+    height=200,
+    placeholder="Paste the job description..."
+)
+if st.button("Analyze Resume"):
+    if uploaded_resume is None:
+        st.warning("Please upload your resume PDF.")
+
+    elif not job_description.strip():
+        st.warning("Please paste the job description.")
+
+    else:
+        pdf_reader = PdfReader(uploaded_resume)
+
+        resume_text = ""
+        for page in pdf_reader.pages:
+            resume_text += page.extract_text() or ""
+
+        if not resume_text.strip():
+            st.error("Could not extract text from this PDF. Please upload a text-based PDF.")
+        else:
+
+            st.success("Resume uploaded and text extracted successfully!")
+
+            # Define technical skills
+            all_skills = [
+                "Java", "Python", "SQL", "DSA", "DBMS",
+                "Operating Systems", "Machine Learning",
+                "Statistics", "HTML", "CSS", "JavaScript",
+                "Communication", "Problem Solving"
+            ]
+
+            # Find skills in job description
+            jd_lower = job_description.lower()
+            resume_lower = resume_text.lower()
+
+            required_skills = [
+                skill for skill in all_skills
+                if skill.lower() in jd_lower
+            ]
+
+            # Find matching and missing skills
+            matched_skills = [
+                skill for skill in required_skills
+                if skill.lower() in resume_lower
+            ]
+
+            missing_skills = [
+                skill for skill in required_skills
+                if skill.lower() not in resume_lower
+            ]
+
+            # Calculate match percentage
+            if required_skills:
+                match_score = (len(matched_skills) / len(required_skills)) * 100
+            else:
+                match_score = 0
+
+            st.subheader("📊 Resume Match Results")
+            st.metric("Resume Match Score", f"{match_score:.1f}%")
+            st.progress(match_score / 100)
+
+            st.subheader("✅ Matching Skills")
+            st.write(matched_skills if matched_skills else "No matching skills found.")
+
+            st.subheader("❌ Missing Skills")
+            st.write(missing_skills if missing_skills else "No missing skills!")
+
+            st.subheader("💡 Recommendations")
+            for skill in missing_skills:
+                st.write(f"• Add relevant {skill} experience or projects if you genuinely have them.")
+
+                        
+                    
