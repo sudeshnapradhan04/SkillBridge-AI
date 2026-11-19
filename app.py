@@ -256,9 +256,23 @@ if st.button("Analyze Resume"):
             st.subheader("❌ Missing Skills")
             st.write(missing_skills if missing_skills else "No missing skills!")
 
-            st.subheader("💡 Recommendations")
-            for skill in missing_skills:
-                st.write(f"• Add relevant {skill} experience or projects if you genuinely have them.")
+           
+            st.subheader("💡 Smart Skill Recommendations")
 
-                        
-                    
+            for skill in missing_skills:
+                if skill in ["Java", "Python", "DSA", "SQL"]:
+                    priority = "High"
+                    suggestion = f"Learn {skill} fundamentals and solve beginner-level problems."
+
+                elif skill in ["DBMS", "Operating Systems", "Machine Learning", "Statistics"]:
+                    priority = "Medium"
+                    suggestion = f"Study core concepts of {skill} and practice examples."
+
+                else:
+                    priority = "Low"
+                    suggestion = f"Build practical knowledge of {skill} through small projects."
+
+                st.write(f"**{skill} — {priority} Priority**")
+                st.info(suggestion)
+
+                                
